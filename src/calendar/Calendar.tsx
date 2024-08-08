@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import './calendar.css'
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface ITime {
     timeline: number[];
@@ -11,6 +11,28 @@ interface IDays{
 }
 
 export default function Calendar() {
+
+    const [data, setData] = useState([]);
+    
+    const refObject = useRef(false);
+
+
+    useEffect(() => {
+        if(!refObject.current){
+            refObject.current=true;
+        fetch("/tasks.json")
+            .then((response) => response.json())  
+            .then((data) => {
+                setData(data);  
+            })
+            .catch((error) => {
+                console.error('Error fetching the JSON file:', error);
+            });
+        }
+    }, []);
+
+    const tasks=data.map((data)=>{return data});
+   
 
     const daysArray: IDays = {
         days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
@@ -27,7 +49,7 @@ export default function Calendar() {
                 <Box className="calendarGrid">
                     <Box className="timelineContainer">
                         {timelineObject.timeline.map((time)=>(
-                            <Box className="time">{time}</Box>
+                            <Box className="time">{time}:00</Box>
                         ))}
                     </Box>
                     <Box className="daysContainer">
@@ -37,12 +59,24 @@ export default function Calendar() {
                             </Box>
                         ))}
                     </Box>
+                    
                     <Box className="taskGrid">
-                    {Array.from({ length: 161 }, (_, index) => (
-                <Box key={index} className="task">
-                </Box>
-            ))}
+    {Array.from({ length: 23 }, (_, rowIndex) => (
+        <Box key={`row-${rowIndex}`} className="taskRow">
+            {Array.from({ length: 7 }, (_, colIndex) => {
+                const cellIndex = rowIndex * 7 + colIndex;
+                return cellIndex < 161 ? (
+                    <Box key={`cell-${cellIndex}`} className="task">
+                        {colIndex}
                     </Box>
+                ) : null;
+            })}
+        </Box>
+    ))}
+</Box>
+
+
+
                 </Box>
             </Box>
         </Box>

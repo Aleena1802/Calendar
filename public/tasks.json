@@ -1,0 +1,33 @@
+[
+    {
+      "task": "Meeting",
+      "day": "Monday",
+      "start": "09:00",
+      "end": "10:30"
+    },
+    {
+      "task": "Lunch",
+      "day": "Monday",
+      "start": "10:30",
+      "end": "11:30"
+    },
+    {
+      "task": "Project Work",
+      "day": "Wednesday",
+      "start": "11:30",
+      "end": "13:00"
+    },
+    {
+      "task": "Workshop",
+      "day": "Friday",
+      "start": "13:00",
+      "end": "15:00"
+    },
+    {
+      "task": "Conference Call",
+      "day": "Wednesday",
+      "start": "12:00",
+      "end": "16:30"
+    }
+  ]
+  

@@ -1,12 +1,12 @@
 
 .navOutterDiv{
-    background-color: lightblue;
     margin: 0;
     display: grid;
     grid-template-columns: 1fr auto;
     justify-content: space-between;
     height: 70px;
     width: 100%;
+    border: 1px solid black;
 }
 
 .navHeading{

@@ -1,12 +1,12 @@
 
 import NavBar from './nav bar/Nav'
-import SideBar from './sidebar/SideBar'
+import MainArea from './main/MainArea'
 function App() {
 
   return (
     <>
       <NavBar/>
-      <SideBar/>
+      <MainArea/>
     </>
   )
 }

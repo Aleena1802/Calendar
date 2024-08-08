@@ -59,24 +59,17 @@ export default function Calendar() {
                             </Box>
                         ))}
                     </Box>
-                    
+
+
                     <Box className="taskGrid">
-    {Array.from({ length: 23 }, (_, rowIndex) => (
-        <Box key={`row-${rowIndex}`} className="taskRow">
-            {Array.from({ length: 7 }, (_, colIndex) => {
-                const cellIndex = rowIndex * 7 + colIndex;
-                return cellIndex < 161 ? (
-                    <Box key={`cell-${cellIndex}`} className="task">
-                        {colIndex}
+                    {Array.from({ length: 161 }, (_, index) => (
+                <Box key={index} className="task">
+                    
+                </Box>
+            ))}
                     </Box>
-                ) : null;
-            })}
-        </Box>
-    ))}
-</Box>
 
-
-
+                    
                 </Box>
             </Box>
         </Box>

@@ -13,7 +13,6 @@ interface IDays {
 export default function Calendar() {
 
     const [data, setData] = useState([]);
-
     const refObject = useRef(false);
 
     useEffect(() => {
@@ -41,6 +40,22 @@ export default function Calendar() {
         timeline: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     };
 
+    const [overlap, setOverlap]=useState(false);
+    useEffect(() => {
+        let overlapFound = false;
+        mondayTasks.forEach((task, index) => {
+            const endHour = Number(task.end.substring(0, 2));
+            if (index < mondayTasks.length - 1) {
+                const nextTaskStartHour = Number(mondayTasks[index + 1].start.substring(0, 2));
+                if (endHour > nextTaskStartHour) {
+                    overlapFound = true;
+                }
+            }
+        });
+        setOverlap(overlapFound);
+    }, [mondayTasks]);
+
+
     return (
         <Box className="calendarContainer">
             <Box className="optionContainer">
@@ -67,19 +82,29 @@ export default function Calendar() {
                                 <Box key={index} className="task">
                                 </Box>
                             ))}
-                            <Box className="eventContainer">
+                            <Box className={overlap?'eventContainer':'flexColumn'}>
                                 {mondayTasks.map((task, index) => {
                                     const startHour = Number(task.start.substring(0, 2));
+                                    const startMin=Number(task.start.substring(3,5))/60;
                                     const endHour = Number(task.end.substring(0, 2));
-                                    const duration = endHour - startHour;
+                                    const endMin=Number(task.end.substring(3,5))/60;
+                                    const startTime=startHour+startMin;
+                                    const endTime=endHour+endMin;
+                                    const duration = endTime.toFixed(2) - startTime.toFixed(2);
                                     
+                                    console.log("start time: "+ startTime.toFixed(2));
+                                    console.log("end time: "+ endTime.toFixed(2));
+                                    console.log("duration: "+ duration);
                                     return (
-                                        <Box className="event" style={{ height: `${duration * 50}px`, marginTop: `${(startHour - 1) * 50}px` }}>{task.task}</Box>
+                                        <Box className={overlap?'overlapEvent':'event'} style={{ height: `${duration.toFixed(1) * 50}px`, top: `${(startHour - 1) * 50}px` }}>{task.task}</Box>
                                     )
                                 })}
                             </Box>
+
+
                         </Box>
                     </Box>
+
 
                 </Box>
             </Box>

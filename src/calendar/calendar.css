@@ -101,15 +101,6 @@
     background-color: pink;
 }
 
-.event {
-    left: 10px; 
-    right: 10px; 
-    background-color: lightsalmon;
-    border: 1px solid red;
-    padding: 5px;
-    box-sizing: border-box;
-    min-width: 10px;
-}
 .eventContainer{
     height: 100%;
     position: absolute;
@@ -118,6 +109,28 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.overlapEvent{
+    background-color: lightsalmon;
+    border: 1px solid red;
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.event {
+    background-color: lightsalmon;
+    border: 1px solid red;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+}
+
+.flexColumn{
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
 
 /* 
 .taskGrid{

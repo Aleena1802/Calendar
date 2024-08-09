@@ -67,26 +67,17 @@ export default function Calendar() {
                                 <Box key={index} className="task">
                                 </Box>
                             ))}
-                            {mondayTasks.map((task, index) => {
-                                const startHour = Number(task.start.substring(0, 2));
-                                const endHour = Number(task.end.substring(0, 2));
-                                const duration = endHour - startHour;
-
-                                // Check if current task overlaps with the next task
-                                const isOverlap = () => {
-                                    if (index < mondayTasks.length - 1) {
-                                        const nextTaskStartHour = Number(mondayTasks[index + 1].start.substring(0, 2));
-                                        return endHour > nextTaskStartHour;
-                                    }
-                                    return false;
-                                };
-
-                                
-
-                                return (
-                                    <Box className="event" style={{ minHeight: `${duration * 50}px`, top: `${(startHour - 1) * 50}px` }}>{task.task}</Box>
-                                )
-                            })}
+                            <Box className="eventContainer">
+                                {mondayTasks.map((task, index) => {
+                                    const startHour = Number(task.start.substring(0, 2));
+                                    const endHour = Number(task.end.substring(0, 2));
+                                    const duration = endHour - startHour;
+                                    
+                                    return (
+                                        <Box className="event" style={{ height: `${duration * 50}px`, marginTop: `${(startHour - 1) * 50}px` }}>{task.task}</Box>
+                                    )
+                                })}
+                            </Box>
                         </Box>
                     </Box>
 

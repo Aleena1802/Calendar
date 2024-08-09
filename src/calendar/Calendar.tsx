@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import './calendar.css'
 import React, { useEffect, useState, useRef } from "react";
+import Column from "./CalendarColumn";
 
 interface ITime {
     timeline: number[];
@@ -31,6 +32,13 @@ export default function Calendar() {
 
     const tasks = data.map((data) => { return data; });
     const mondayTasks = tasks.filter(task => task.day === 'Monday');
+    const tuesdayTasks = tasks.filter(task => task.day === 'Tuesday');
+    const wednesdayTasks = tasks.filter(task => task.day === 'Wednesday');
+    const thursdayTasks = tasks.filter(task => task.day === 'Thursday');
+    const fridayTasks = tasks.filter(task => task.day === 'Friday');
+    const saturdayTasks = tasks.filter(task => task.day === 'Saturday');
+    const sundayTasks = tasks.filter(task => task.day === 'Sunday');
+
 
     const daysArray: IDays = {
         days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -40,20 +48,6 @@ export default function Calendar() {
         timeline: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     };
 
-    const [overlap, setOverlap]=useState(false);
-    useEffect(() => {
-        let overlapFound = false;
-        mondayTasks.forEach((task, index) => {
-            const endHour = Number(task.end.substring(0, 2));
-            if (index < mondayTasks.length - 1) {
-                const nextTaskStartHour = Number(mondayTasks[index + 1].start.substring(0, 2));
-                if (endHour > nextTaskStartHour) {
-                    overlapFound = true;
-                }
-            }
-        });
-        setOverlap(overlapFound);
-    }, [mondayTasks]);
 
 
     return (
@@ -77,7 +71,15 @@ export default function Calendar() {
                     </Box>
 
                     <Box className="taskGrid">
-                        <Box className="taskCol">
+                    <Column taskList={mondayTasks} />
+                    <Column taskList={tuesdayTasks} />
+                    <Column taskList={wednesdayTasks} />
+                    <Column taskList={thursdayTasks} />
+                    <Column taskList={fridayTasks} />
+                    <Column taskList={saturdayTasks} />
+                    <Column taskList={sundayTasks} />
+
+                    {/* <Box className="taskCol">
                             {Array.from({ length: 23 }, (_, index) => (
                                 <Box key={index} className="task">
                                 </Box>
@@ -92,9 +94,6 @@ export default function Calendar() {
                                     const endTime=endHour+endMin;
                                     const duration = endTime.toFixed(2) - startTime.toFixed(2);
                                     
-                                    console.log("start time: "+ startTime.toFixed(2));
-                                    console.log("end time: "+ endTime.toFixed(2));
-                                    console.log("duration: "+ duration);
                                     return (
                                         <Box className={overlap?'overlapEvent':'event'} style={{ height: `${duration.toFixed(1) * 50}px`, top: `${(startHour - 1) * 50}px` }}>{task.task}</Box>
                                     )
@@ -102,7 +101,7 @@ export default function Calendar() {
                             </Box>
 
 
-                        </Box>
+                        </Box> */}
                     </Box>
 
 

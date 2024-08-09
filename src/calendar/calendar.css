@@ -58,17 +58,6 @@
     justify-content: center;
     align-items: center;
 }
-/* 
-.taskRow{
-    display:flex;
-    background-color: pink;
-    height: 28px;
-    align-items: center;
-    border: 1px solid black;
-    width: 100%;
-    justify-content: space-between;
-} */
-
 
 .taskCol{
     background-color: rgb(215, 215, 215);
@@ -132,12 +121,7 @@
     width: 100%;
 }
 
-/* 
+
 .taskGrid{
-    grid-area: tasks;
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(7,1fr);
-    grid-template-rows: repeat(23,1fr);
-    height: 100%;
-}  */
+    display: flex;
+}  

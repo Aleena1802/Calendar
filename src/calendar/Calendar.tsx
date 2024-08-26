@@ -39,16 +39,77 @@ export default function Calendar() {
     const saturdayTasks = tasks.filter(task => task.day === 'Saturday');
     const sundayTasks = tasks.filter(task => task.day === 'Sunday');
 
+    // pushToArray(mondayTasks, tuesdayTasks);
+    // pushToArray(tuesdayTasks, wednesdayTasks);
+    // pushToArray(wednesdayTasks, thursdayTasks);
+    // pushToArray(thursdayTasks, fridayTasks);
+    // pushToArray(fridayTasks, saturdayTasks);
+    // pushToArray(saturdayTasks, sundayTasks);
+    // pushToArray(sundayTasks, mondayTasks);
+
 
     const daysArray: IDays = {
         days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     };
 
     const timelineObject: ITime = {
-        timeline: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+        timeline: [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     };
 
+//   function pushToArray(arr1, arr2){
+//     for(let i = 0; i < arr1.length; i++){
+//         if(arr1[i].day !== arr1[i].endDay){
+//             const newItem = { ...arr1[i] };
+//             newItem.start = "00:00";
+//             newItem.end=arr1[i].end;
+//             newItem.endDay = arr1[i].endDay; 
+//             newItem.day = newItem.endDay; 
+//             arr2.push(newItem); 
+//         }
+//     }
+// }
 
+function range(start, end, step = 1) {
+    const result = [];
+    for (let i = start; i <= end; i += step) {
+      result.push(i);
+    }
+    return result;
+  }
+
+
+  function addToNextDay() {
+    const extendedTasks = tasks.filter(task => {
+        // Only filter tasks that have both a startDate and endDate
+        if (task.startDate && task.endDate) {
+            const startDate = new Date(task.startDate);
+            const endDate = new Date(task.endDate);
+            
+            // Return tasks where the startDate and endDate are not the same
+            return startDate.getTime() !== endDate.getTime();
+        }
+        return false;
+    });
+
+    const differenceInDays=[];
+
+    for (let i = 0; i < extendedTasks.length; i++) {
+        const startDate = new Date(extendedTasks[i].startDate);
+        const endDate = new Date(extendedTasks[i].endDate);
+        
+        // Calculate the difference in milliseconds
+        const differenceInMillis = endDate - startDate;
+        
+        // Convert milliseconds to days
+        const difference = Math.ceil(differenceInMillis / (1000 * 60 * 60 * 24));
+        differenceInDays.push(difference);
+        console.log(`Difference in Days: ${differenceInDays}`);
+    }
+
+    console.log(extendedTasks);
+}
+
+addToNextDay();
 
     return (
         <Box className="calendarContainer">

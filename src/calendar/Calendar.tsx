@@ -29,86 +29,135 @@ export default function Calendar() {
     }
   }, []);
 
-    const tasks = data.map((data) => { return data; });
-    const mondayTasks = tasks.filter(task => task.day === 'Monday');
-    const tuesdayTasks = tasks.filter(task => task.day === 'Tuesday');
-    const wednesdayTasks = tasks.filter(task => task.day === 'Wednesday');
-    const thursdayTasks = tasks.filter(task => task.day === 'Thursday');
-    const fridayTasks = tasks.filter(task => task.day === 'Friday');
-    const saturdayTasks = tasks.filter(task => task.day === 'Saturday');
-    const sundayTasks = tasks.filter(task => task.day === 'Sunday');
+  const tasks = data.map((data) => {
+    return data;
+  });
 
-    // pushToArray(mondayTasks, tuesdayTasks);
-    // pushToArray(tuesdayTasks, wednesdayTasks);
-    // pushToArray(wednesdayTasks, thursdayTasks);
-    // pushToArray(thursdayTasks, fridayTasks);
-    // pushToArray(fridayTasks, saturdayTasks);
-    // pushToArray(saturdayTasks, sundayTasks);
-    // pushToArray(sundayTasks, mondayTasks);
-
+  // pushToArray(mondayTasks, tuesdayTasks);
+  // pushToArray(tuesdayTasks, wednesdayTasks);
+  // pushToArray(wednesdayTasks, thursdayTasks);
+  // pushToArray(thursdayTasks, fridayTasks);
+  // pushToArray(fridayTasks, saturdayTasks);
+  // pushToArray(saturdayTasks, sundayTasks);
+  // pushToArray(sundayTasks, mondayTasks);
 
   const daysArray: IDays = {
     days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   };
 
-    const timelineObject: ITime = {
-        timeline: [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-    };
+  const timelineObject: ITime = {
+    timeline: [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21, 22, 23,
+    ],
+  };
 
-//   function pushToArray(arr1, arr2){
-//     for(let i = 0; i < arr1.length; i++){
-//         if(arr1[i].day !== arr1[i].endDay){
-//             const newItem = { ...arr1[i] };
-//             newItem.start = "00:00";
-//             newItem.end=arr1[i].end;
-//             newItem.endDay = arr1[i].endDay; 
-//             newItem.day = newItem.endDay; 
-//             arr2.push(newItem); 
-//         }
-//     }
-// }
+  //   function pushToArray(arr1, arr2){
+  //     for(let i = 0; i < arr1.length; i++){
+  //         if(arr1[i].day !== arr1[i].endDay){
+  //             const newItem = { ...arr1[i] };
+  //             newItem.start = "00:00";
+  //             newItem.end=arr1[i].end;
+  //             newItem.endDay = arr1[i].endDay;
+  //             newItem.day = newItem.endDay;
+  //             arr2.push(newItem);
+  //         }
+  //     }
+  // }
 
-function range(start, end, step = 1) {
-    const result = [];
-    for (let i = start; i <= end; i += step) {
-      result.push(i);
-    }
-    return result;
-  }
-
+  // function range(start, end, step = 1) {
+  //   const result = [];
+  //   for (let i = start; i <= end; i += step) {
+  //     result.push(i);
+  //   }
+  //   return result;
+  // }
 
   function addToNextDay() {
-    const extendedTasks = tasks.filter(task => {
-        // Only filter tasks that have both a startDate and endDate
-        if (task.startDate && task.endDate) {
-            const startDate = new Date(task.startDate);
-            const endDate = new Date(task.endDate);
-            
-            // Return tasks where the startDate and endDate are not the same
-            return startDate.getTime() !== endDate.getTime();
-        }
-        return false;
+    const extendedTasks = tasks.filter((task) => {
+      if (task.startDate && task.endDate) {
+        const startDate = new Date(task.startDate);
+        const endDate = new Date(task.endDate);
+
+        return startDate.getTime() !== endDate.getTime();
+      }
+      return false;
     });
 
-    const differenceInDays=[];
+    const dayMapping = {
+      Monday: tasks.filter((task) => task.day === "Monday"),
+      Tuesday: tasks.filter((task) => task.day === "Tuesday"),
+      Wednesday: tasks.filter((task) => task.day === "Wednesday"),
+      Thursday: tasks.filter((task) => task.day === "Thursday"),
+      Friday: tasks.filter((task) => task.day === "Friday"),
+      Saturday: tasks.filter((task) => task.day === "Saturday"),
+      Sunday: tasks.filter((task) => task.day === "Sunday"),
+    };
 
+    // console.log(extendedTasks);
     for (let i = 0; i < extendedTasks.length; i++) {
-        const startDate = new Date(extendedTasks[i].startDate);
-        const endDate = new Date(extendedTasks[i].endDate);
-        
-        // Calculate the difference in milliseconds
-        const differenceInMillis = endDate - startDate;
-        
-        // Convert milliseconds to days
-        const difference = Math.ceil(differenceInMillis / (1000 * 60 * 60 * 24));
-        differenceInDays.push(difference);
-        console.log(`Difference in Days: ${differenceInDays}`);
+      const task = extendedTasks[i];
+      const endDate = new Date(task.endDate);
+      // console.log("start date: " + startDate);
+
+      let currentDay = new Date(task.startDate);
+      while (currentDay <= endDate) {
+        const startDate = new Date(task.startDate);
+        const dayName = currentDay.toLocaleDateString("en-US", {
+          weekday: "long",
+        });
+        const dayArray = dayMapping[dayName];
+
+        if (i === 0) {
+          console.log(
+            "currntday: " +
+              currentDay +
+              " " +
+              currentDay.getTime() +
+              " extended task: " +
+              i
+          );
+          console.log(endDate.getTime());
+        }
+        const newTask = {
+          ...task,
+          day: dayName,
+          start:
+            currentDay.getTime() === startDate.getTime() ? task.start : "00:00",
+          end: currentDay.getTime() === endDate.getTime() ? task.end : "23:59",
+        };
+
+        const taskIndex = dayArray.findIndex(
+          (t) =>
+            t.task === task.task &&
+            t.startDate === task.startDate &&
+            t.endDate === task.endDate &&
+            t.day === dayName
+        );
+
+        if (taskIndex !== -1) {
+          dayArray.splice(taskIndex, 1);
+        }
+
+        dayArray.push(newTask);
+        currentDay.setDate(currentDay.getDate() + 1);
+        //console.log("current day: " + currentDay);
+      }
     }
+    return dayMapping;
+  }
 
-    console.log(extendedTasks);
-}
+  const days = addToNextDay();
+  const mondayTasks = days["Monday"];
+  const tuesdayTasks = days["Tuesday"];
+  const wednesdayTasks = days["Wednesday"];
+  const thursdayTasks = days["Thursday"];
+  const fridayTasks = days["Friday"];
+  const saturdayTasks = days["Saturday"];
+  const sundayTasks = days["Sunday"];
 
-addToNextDay();
+  console.log("monday tasks: ");
+  console.log(mondayTasks);
 
   return (
     <>
@@ -135,28 +184,6 @@ addToNextDay();
               <Column taskList={fridayTasks} />
               <Column taskList={saturdayTasks} />
               <Column taskList={sundayTasks} />
-
-              {/* <Box className="taskCol">
-                            {Array.from({ length: 23 }, (_, index) => (
-                                <Box key={index} className="task">
-                                </Box>
-                            ))}
-                            <Box className={overlap?'eventContainer':'flexColumn'}>
-                                {mondayTasks.map((task, index) => {
-                                    const startHour = Number(task.start.substring(0, 2));
-                                    const startMin=Number(task.start.substring(3,5))/60;
-                                    const endHour = Number(task.end.substring(0, 2));
-                                    const endMin=Number(task.end.substring(3,5))/60;
-                                    const startTime=startHour+startMin;
-                                    const endTime=endHour+endMin;
-                                    const duration = endTime.toFixed(2) - startTime.toFixed(2);
-                                    
-                                    return (
-                                        <Box className={overlap?'overlapEvent':'event'} style={{ height: `${duration.toFixed(1) * 50}px`, top: `${(startHour - 1) * 50}px` }}>{task.task}</Box>
-                                    )
-                                })}
-                            </Box>
-                        </Box> */}
             </Box>
           </Box>
         </Box>

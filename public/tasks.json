@@ -1,56 +1,56 @@
 [
   {
-      "task": "Meeting",
-      "day": "Monday",
-      "startDate": "2021-02-15",
-      "endDate": "2021-02-17",
-      "start": "09:00",
-      "end": "12:15",
-      "endDay": "Wednesday"
+    "task": "Meeting",
+    "day": "Monday",
+    "startDate": "2021-02-15",
+    "endDate": "2021-02-17",
+    "start": "09:00",
+    "end": "12:10",
+    "endDay": "Wednesday"
   },
   {
-      "task": "Lunch",
-      "day": "Monday",
-      "startDate": "2021-02-15",
-      "endDate": "2021-02-16",
-      "start": "23:00",
-      "end": "02:30",
-      "endDay": "Tuesday"
+    "task": "Lunch",
+    "day": "Tuesday",
+    "startDate": "2021-02-15",
+    "endDate": "2021-02-16",
+    "start": "23:00",
+    "end": "02:30",
+    "endDay": "Tuesday"
   },
   {
-      "task": "Project Work",
-      "day": "Wednesday",
-      "startDate": "2021-02-17",
-      "endDate": "2021-02-17",
-      "start": "11:30",
-      "end": "13:00",
-      "endDay": "Wednesday"
+    "task": "Project Work",
+    "day": "Wednesday",
+    "startDate": "2021-02-17",
+    "endDate": "2021-02-17",
+    "start": "11:30",
+    "end": "13:00",
+    "endDay": "Wednesday"
   },
   {
-      "task": "Workshop",
-      "day": "Friday",
-      "startDate": "2021-02-19",
-      "endDate": "2021-02-19",
-      "start": "13:00",
-      "end": "15:00",
-      "endDay": "Friday"
+    "task": "Workshop",
+    "day": "Friday",
+    "startDate": "2021-02-19",
+    "endDate": "2021-02-19",
+    "start": "13:00",
+    "end": "15:00",
+    "endDay": "Friday"
   },
   {
-      "task": "Conference Call",
-      "day": "Wednesday",
-      "startDate": "2021-02-17",
-      "endDate": "2021-02-17",
-      "start": "12:00",
-      "end": "16:30",
-      "endDay": "Wednesday"
+    "task": "Conference Call",
+    "day": "Wednesday",
+    "startDate": "2021-02-17",
+    "endDate": "2021-02-17",
+    "start": "12:00",
+    "end": "16:30",
+    "endDay": "Wednesday"
   },
   {
-      "task": "Something",
-      "day": "Sunday",
-      "startDate": "2021-02-21",
-      "endDate": "2021-02-21",
-      "start": "15:00",
-      "end": "23:00",
-      "endDay": "Sunday"
+    "task": "Something",
+    "day": "Sunday",
+    "startDate": "2021-02-21",
+    "endDate": "2021-02-21",
+    "start": "15:00",
+    "end": "23:00",
+    "endDay": "Sunday"
   }
 ]
